@@ -15,11 +15,24 @@ final class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         setupSubViews()
+        getData()
     }
 
     private func setupSubViews() {
         
     }
+    
+    private func populateData() {
+        
+    }
 
+    private func getData(){
+        
+        NetworkManager.fetchCharacters(from: NetworkManager.ServerURL.charactersURLp1) { [weak self] charactersObj in
+            DispatchQueue.main.async {
+                self?.populateData()
+            }
+        }
+    }
 }
 
