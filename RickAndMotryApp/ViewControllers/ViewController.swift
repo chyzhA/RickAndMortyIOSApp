@@ -9,6 +9,8 @@ import UIKit
 
 final class ViewController: UIViewController {
 
+    private var modelObject: RMCharacter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,12 +25,13 @@ final class ViewController: UIViewController {
     }
     
     private func populateData() {
-        
+        print("!!!!!!")
     }
 
     private func getData(){
         
         NetworkManager.fetchCharacters(from: NetworkManager.ServerURL.charactersURLp1) { [weak self] charactersObj in
+            self?.modelObject = charactersObj
             DispatchQueue.main.async {
                 self?.populateData()
             }
