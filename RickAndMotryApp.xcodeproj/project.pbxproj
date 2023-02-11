@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5022826929981DFA00B4B02C /* RMCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5022826829981DFA00B4B02C /* RMCollectionCell.swift */; };
 		503FA388298AF06200171FD1 /* RMNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503FA387298AF06200171FD1 /* RMNetworkManager.swift */; };
 		503FA38A298AF06E00171FD1 /* RMRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503FA389298AF06E00171FD1 /* RMRequest.swift */; };
 		506E3529298AE0B3008118C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506E3528298AE0B3008118C7 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5022826829981DFA00B4B02C /* RMCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCollectionCell.swift; sourceTree = "<group>"; };
 		503FA387298AF06200171FD1 /* RMNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMNetworkManager.swift; sourceTree = "<group>"; };
 		503FA389298AF06E00171FD1 /* RMRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMRequest.swift; sourceTree = "<group>"; };
 		506E3525298AE0B3008118C7 /* RickAndMotryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMotryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5022826729981DCE00B4B02C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5022826829981DFA00B4B02C /* RMCollectionCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		506E351C298AE0B3008118C7 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +112,7 @@
 		506E353E298AE0F0008118C7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5022826729981DCE00B4B02C /* Views */,
 				506E352C298AE0B3008118C7 /* ViewController.swift */,
 			);
 			path = ViewControllers;
@@ -213,6 +224,7 @@
 				503FA388298AF06200171FD1 /* RMNetworkManager.swift in Sources */,
 				506E3529298AE0B3008118C7 /* AppDelegate.swift in Sources */,
 				506E352B298AE0B3008118C7 /* SceneDelegate.swift in Sources */,
+				5022826929981DFA00B4B02C /* RMCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
