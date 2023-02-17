@@ -64,6 +64,7 @@ extension RMCollectionCell {
     
     func setName(withName name: String) {
         characterNameLabel.text = "Name: \n\(name)"
+        characterNameLabel.textColor = .label
         characterNameLabel.font = characterNameLabel.font.withSize(12)
         characterNameLabel.numberOfLines = 2
     }

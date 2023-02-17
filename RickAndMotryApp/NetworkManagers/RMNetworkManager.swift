@@ -7,18 +7,18 @@
 
 import Foundation
 
-extension NetworkManager {
-    enum ServerURL {
-        //
-        static let charactersURLp1 = "https://rickandmortyapi.com/api/character/2"
-        
-    }
-}
+//extension NetworkManager {
+//    enum ServerURL {
+//        //
+//        static let charactersURLp1 = "https://rickandmortyapi.com/api/character/"
+//
+//    }
+//}
 
 extension NetworkManager {
     // Edit fetch method
     static func fetchCharacters(from urlString: String,
-                           withCompletion completion: @escaping ((RMCharacter) -> Void)) {
+                           withCompletion completion: @escaping ((RMCharactersModel) -> Void)) {
         let session = URLSession(configuration: .default)
         guard let url = URL(string: urlString) else { return }
         var urlRequest = URLRequest(url: url)
@@ -32,7 +32,7 @@ extension NetworkManager {
                 let decoder = JSONDecoder()
                 if let data = data {
                     do {
-                        let decodedObject = try decoder.decode(RMCharacter.self, from: data)
+                        let decodedObject = try decoder.decode(RMCharactersModel.self, from: data)
                         completion(decodedObject)
                         print("DECODED \(RMCharacter.self) SUCCESSFULLY")
                         print(decodedObject)

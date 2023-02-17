@@ -17,7 +17,8 @@ final class ViewController: UIViewController {
         return label
     }()
     
-    private var modelObject: RMCharacter?
+    private var charactersArray: [RMCharacter] = []
+    private var modelObject: RMCharactersModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ final class ViewController: UIViewController {
         
         setupSubViews()
         addConstraints()
-        //getData()
+        getData(from: "https://rickandmortyapi.com/api/character/")
     }
 
     private func setupSubViews() {
@@ -75,15 +76,21 @@ final class ViewController: UIViewController {
     }
     
     private func populateData() {
-        print("!!!!!!")
+        charactersArray += modelObject!.results
     }
 
-    private func getData(){
+    private func getData(from url: String){
         
-        NetworkManager.fetchCharacters(from: NetworkManager.ServerURL.charactersURLp1) { [weak self] charactersObj in
+        NetworkManager.fetchCharacters(from: url) { [weak self] charactersObj in
             self?.modelObject = charactersObj
+            
             DispatchQueue.main.async {
+                
                 self?.populateData()
+                if let next = self?.modelObject?.info.next {
+                    self?.getData(from: next)
+                }
+                
             }
         }
     }
@@ -91,14 +98,14 @@ final class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        30
+        charactersArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionOfCharacters.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        (cell as? RMCollectionCell)?.setImage(with: "person")
-        (cell as? RMCollectionCell)?.setName(withName: "Rick Sanchez")
+        (cell as? RMCollectionCell)?.setImage(with: charactersArray[indexPath.row].image)
+        (cell as? RMCollectionCell)?.setName(withName: charactersArray[indexPath.row].name)
         
         return cell
         
