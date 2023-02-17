@@ -26,9 +26,11 @@ final class ViewController: UIViewController {
         collectionOfCharacters.frame = view.bounds
         view.backgroundColor = .systemBackground
         
+        getData(from: "https://rickandmortyapi.com/api/character/")
+        
         setupSubViews()
         addConstraints()
-        getData(from: "https://rickandmortyapi.com/api/character/")
+        
     }
 
     private func setupSubViews() {
@@ -75,22 +77,19 @@ final class ViewController: UIViewController {
         
     }
     
-    private func populateData() {
+    private func updateCharactersList() {
         charactersArray += modelObject!.results
+        collectionOfCharacters.reloadData()
     }
 
     private func getData(from url: String){
-        
         NetworkManager.fetchCharacters(from: url) { [weak self] charactersObj in
             self?.modelObject = charactersObj
-            
             DispatchQueue.main.async {
-                
-                self?.populateData()
+                self?.updateCharactersList()
                 if let next = self?.modelObject?.info.next {
                     self?.getData(from: next)
                 }
-                
             }
         }
     }
@@ -106,10 +105,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         
         (cell as? RMCollectionCell)?.setImage(with: charactersArray[indexPath.row].image)
         (cell as? RMCollectionCell)?.setName(withName: charactersArray[indexPath.row].name)
-        
         return cell
-        
     }
-    
-    
 }

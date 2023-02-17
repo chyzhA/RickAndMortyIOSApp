@@ -54,7 +54,7 @@ extension NetworkManager {
             } else {
                 print("URL Session Task Failed: %@", error!.localizedDescription)
             }
-            log(response: response as? HTTPURLResponse, data: data, error: error)
+            //log(response: response as? HTTPURLResponse, data: data, error: error)
         })
         task.resume()
     }
