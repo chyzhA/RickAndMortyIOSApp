@@ -57,15 +57,33 @@ class RMCollectionCell: UICollectionViewCell {
 
 extension RMCollectionCell {
     func setImage(with image: String) {
-        characterPhoto.image = UIImage(systemName: image)
+        
         characterPhoto.contentMode = .scaleAspectFit
         characterPhoto.clipsToBounds = true
+        downloadImage(from: URL(string: image)!)
     }
     
     func setName(withName name: String) {
-        characterNameLabel.text = "Name: \n\(name)"
+        characterNameLabel.text = "Name: \(name)"
         characterNameLabel.textColor = .label
         characterNameLabel.font = characterNameLabel.font.withSize(12)
         characterNameLabel.numberOfLines = 2
     }
+    
+    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    private func downloadImage(from url: URL) {
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            // always update the UI from the main thread
+            DispatchQueue.main.async() { [weak self] in
+                self?.characterPhoto.image = UIImage(data: data)
+            }
+        }
+    }
+    
 }
