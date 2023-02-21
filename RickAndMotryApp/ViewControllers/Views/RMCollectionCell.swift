@@ -8,24 +8,25 @@
 import UIKit
 
 class RMCollectionCell: UICollectionViewCell {
-    
+    // MARK: - views
     private let characterPhoto = UIImageView()
     private let characterNameLabel = UILabel()
     
+    //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubViews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backgroundColor = .secondarySystemBackground
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - setup views
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .secondarySystemBackground
+    }
     private func setupSubViews() {
         
         contentView.addSubview(characterPhoto)
@@ -33,7 +34,7 @@ class RMCollectionCell: UICollectionViewCell {
         setupConstraints()
         
     }
-    
+    //MARK: - add constraints
     private func setupConstraints() {
         
         characterPhoto.translatesAutoresizingMaskIntoConstraints = false
@@ -55,9 +56,9 @@ class RMCollectionCell: UICollectionViewCell {
     
 }
 
+//MARK: Cell methods
 extension RMCollectionCell {
     func setImage(with image: String) {
-        
         characterPhoto.contentMode = .scaleAspectFit
         characterPhoto.clipsToBounds = true
         downloadImage(from: URL(string: image)!)
@@ -69,7 +70,7 @@ extension RMCollectionCell {
         characterNameLabel.font = characterNameLabel.font.withSize(12)
         characterNameLabel.numberOfLines = 2
     }
-    
+    //MARK: - downloading methods
     private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }

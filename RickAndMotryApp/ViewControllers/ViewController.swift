@@ -8,7 +8,7 @@
 import UIKit
 
 final class ViewController: UIViewController {
-
+// MARK: - views
     private let collectionOfCharacters = UICollectionView(frame: .zero,
                                                           collectionViewLayout: UICollectionViewFlowLayout())
     private let appLabel: UILabel = {
@@ -17,9 +17,11 @@ final class ViewController: UIViewController {
         return label
     }()
     
+//MARK: - variables
     private var charactersArray: [RMCharacter] = []
     private var modelObject: RMCharactersModel?
     
+// MARK: - methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +34,7 @@ final class ViewController: UIViewController {
         addConstraints()
         
     }
-
+//MARK: - setup subviews
     private func setupSubViews() {
         
         guard let layout = collectionOfCharacters.collectionViewLayout as? UICollectionViewFlowLayout else { return }
@@ -53,7 +55,7 @@ final class ViewController: UIViewController {
         view.addSubview(collectionOfCharacters)
         
     }
-    
+//MARK: - add constraints
     private func addConstraints() {
         
         appLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +78,7 @@ final class ViewController: UIViewController {
         ])
         
     }
-    
+// MARK: - methods for getting Characters data
     private func updateCharactersList() {
         charactersArray += modelObject!.results
         collectionOfCharacters.reloadData()
@@ -95,6 +97,7 @@ final class ViewController: UIViewController {
     }
 }
 
+//MARK: - data source methods
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         charactersArray.count
